@@ -4,7 +4,6 @@ project(push_swap)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror")
 
 set(SOURCE_FILES main.c
-        libftprintf.a /
         push_swap.c /
         checker.c /
         libft/ft_atoi.c)

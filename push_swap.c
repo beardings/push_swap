@@ -20,29 +20,35 @@ t_lst *createlst(void)
     t_lst *list;
 
     list = (t_lst *)malloc(sizeof(t_lst));
-    list->x = '\0';
+    list->x = 0;
     list->next = NULL;
     return (list);
 }
 
-t_lst *push_swap(int len, char **strs)
+void push_swap(int len, char **strs)
 {
     t_lst *lst_a;
-    t_lst *lst_b;
-    t_lst *head_a;
-    t_lst *head_b;
+    t_lst *head;
     int i;
 
     i = 1;
-    lst_b = createlst();
     lst_a = createlst();
-    head_a = lst_a;
-    while (i <= len)
+    inlst(strs[i], lst_a);
+    i++;
+    while (i < len)
     {
-        inlst(strs[i], lst_a);
-        lst_a->next = createlst();
+        head = createlst();
+        inlst(strs[i], head);
+        head->next = lst_a;
+        lst_a = head;
+        i++;
+    }
+    i = 1;
+    printf("list A");
+    while (lst_a != NULL)
+    {
+        printf("\n     %d", lst_a->x);
         lst_a = lst_a->next;
         i++;
     }
-    return (head_a);
 }

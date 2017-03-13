@@ -14,5 +14,5 @@ typedef struct      s_lst
     struct s_lst    *next;
 }                   t_lst;
 
-t_lst    *push_swap(int len, char **strs);
+void    push_swap(int len, char **strs);
 #endif
