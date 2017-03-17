@@ -27,10 +27,8 @@ void findmid(t_lst **lst_a, t_num *num)
 void begin_sort(t_lst **lst_a, t_lst **lst_b, t_num *num)
 {
     t_lst *tmp;
-    t_lst *res;
 
     tmp = *lst_a;
-    res = NULL;
     while (tmp != NULL)
     {
         if (tmp->x <= num->mid)
@@ -41,12 +39,11 @@ void begin_sort(t_lst **lst_a, t_lst **lst_b, t_num *num)
         }
         else // нужно так переписать ра что бы не использовать его ещё раз
         {
-            pb(lst_a, &res);
+            pb(lst_a, &num->ost);
             tmp = tmp->next;
         }
     }
-    *lst_a = res;
-    free(res);
+    *lst_a = num->ost;
     num->end = num->len - num->start;
 }
 
@@ -129,28 +126,35 @@ void sort_lessfor_b(t_lst **lst, t_num *num)
     }
 }
 
-void return_bina(t_lst *lst_a, t_lst *lst_b)
+void return_bina(t_lst **lst_a, t_lst **lst_b)
 {
-    while (lst_b != NULL)
-        pa(&lst_a, &lst_b);
+    while (*lst_b != NULL)
+        pa(lst_a, lst_b);
 }
 
 void start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num)
 {
-    findmid(&lst_a, num);
     if (num->len > 4) // рекурсию можно замутить как раз таки через вайл
     {
+        findmid(&lst_a, num);
         begin_sort(&lst_a, &lst_b, num);
-        if (num->end < 4)
+        if (num->end > 3)
+        {
+
+        }
+        else if (num->end < 4)
             sort_lessfor_a(&lst_a, num); // если нам не меньше 4 то я доолжен  увеличить медиану
-        if (num->start < 4)
+        if (num->start > 3)
+        {
+
+        }
+        else if (num->start < 4)
             sort_lessfor_b(&lst_b, num);
     }
-   // if (num->len > 4)
-        //return_bina(lst_a, lst_b);
-    if (num->len < 4)
+    else if (num->len < 4)
         sort_lessfor_a(&lst_a, num);
+    if (num->len > 4)
+        return_bina(&lst_a, &lst_b);
     write(1, "\n", 1);
     putout(lst_a, lst_b);
-
 }

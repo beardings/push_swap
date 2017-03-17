@@ -20,6 +20,7 @@ typedef struct s_num
     int len;
     int end;
     int start;
+    t_lst *ost;
 }               t_num;
 
 void    push_swap(int len, char **strs);
