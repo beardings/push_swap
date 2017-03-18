@@ -50,6 +50,9 @@ t_num *createnum(int len)
     num->start = 0;
     num->end = 0;
     num->ost = NULL;
+    num->per = NULL;
+    num->first_b = 0;
+    num->lenop = 0;
     return (num);
 }
 
@@ -77,4 +80,5 @@ void push_swap(int len, char **strs)
     }
     lst_a = head;
     start_sort(lst_a, lst_b, num);
+    printf("\n\nskiko: %d", num->lenop);
 }

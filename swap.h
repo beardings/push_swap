@@ -21,6 +21,9 @@ typedef struct s_num
     int end;
     int start;
     t_lst *ost;
+    t_lst *per;
+    int lenop;
+    int first_b;
 }               t_num;
 
 void    push_swap(int len, char **strs);
