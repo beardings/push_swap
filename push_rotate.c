@@ -64,10 +64,14 @@ void rb(t_lst **lst_b)
     tmp = *lst_b;
     *lst_b = (*lst_b)->next;
     tmp->next = NULL;
-    res = *lst_b;
-    while (res->next != NULL)
-        res = res->next;
-    res->next = tmp;
+    if (*lst_b != NULL)
+    {
+        res = *lst_b;
+        while (res->next != NULL)
+            res = res->next;
+        res != NULL ? res->next = tmp : 0;
+        res == NULL ? res = tmp : 0;
+    }
     //write(1, "rb\n", 3);
 }
 

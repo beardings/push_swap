@@ -20,10 +20,11 @@ typedef struct s_num
     int len;
     int end;
     int start;
-    t_lst *ost;
-    t_lst *per;
     int lenop;
     int first_b;
+    int skira;
+    t_lst *ost;
+    t_lst *per;
 }               t_num;
 
 void    push_swap(int len, char **strs);
@@ -41,6 +42,6 @@ void    rb(t_lst **lst_b);
 void    rr(t_lst *lst_a, t_lst *lst_b);
 void    start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num);
 void    putout(t_lst *lst_a, t_lst *lst_b);
-void    sort_lessfor(t_lst **lst_a, t_num *num);
+void    sort_lessfor(t_lst **lst_a);
 
 #endif

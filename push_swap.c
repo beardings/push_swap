@@ -49,10 +49,11 @@ t_num *createnum(int len)
     num->len = len - 1;
     num->start = 0;
     num->end = 0;
-    num->ost = NULL;
-    num->per = NULL;
     num->first_b = 0;
     num->lenop = 0;
+    num->skira = 0;
+    num->per = NULL;
+    num->ost  = NULL;
     return (num);
 }
 

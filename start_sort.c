@@ -27,9 +27,11 @@ void findmid(t_lst **lst_a, t_num *num)
 void begin_sort(t_lst **lst_a, t_lst **lst_b, t_num *num)
 {
     t_lst *tmp;
+    int wow;
 
+    wow = num->len - num->start;
     tmp = *lst_a;
-    while (tmp != NULL)
+    while (tmp != NULL && wow > 0)
     {
         if (tmp->x <= num->mid)
         {
@@ -37,16 +39,16 @@ void begin_sort(t_lst **lst_a, t_lst **lst_b, t_num *num)
             tmp = tmp->next;
             num->start++;
             num->lenop++;
+            wow--;
         }
-        else // нужно так переписать ра что бы не использовать его ещё раз
+        else
         {
-            pb(lst_a, &num->ost);
             tmp = tmp->next;
-            num->lenop++;
+            ra(lst_a);
+            num->skira++;
+            wow--;
         }
     }
-    *lst_a = num->ost;
-    num->ost = NULL;
     num->end = num->len - num->start;
 }
 
@@ -130,6 +132,54 @@ void sort_lessfor_b(t_lst **lst, t_num *num)
     }
 }
 
+void sort_lessfor(t_lst **lst)
+{
+    t_lst *tmp;
+
+    tmp = *lst;
+    if (tmp != NULL)
+    {
+        if (tmp->x > tmp->next->x)
+        {
+            if ((tmp->x < tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
+                sa(*lst);
+            else if ((tmp->x > tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
+            {
+                ra(lst);
+                sa(*lst);
+                rra(lst);
+                sa(*lst);
+                ra(lst);
+                sa(*lst);
+                rra(lst);
+            }
+            else if ((tmp->x > tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
+            {
+                sa(*lst);
+                ra(lst);
+                sa(*lst);
+                rra(lst);
+            }
+        }
+        else if (tmp->x < tmp->next->x)
+        {
+            if ((tmp->x > tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
+            {
+                ra(lst);
+                sa(*lst);
+                rra(lst);
+                sa(*lst);
+            }
+            else if ((tmp->x < tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
+            {
+                ra(lst);
+                sa(*lst);
+                rra(lst);
+            }
+        }
+    }
+}
+
 int checkmid(t_num *num, t_lst **lst_b)
 {
     int len;
@@ -137,7 +187,7 @@ int checkmid(t_num *num, t_lst **lst_b)
 
     len = 0;
     tmp = *lst_b;
-    while (tmp != NULL)
+    while (tmp != NULL && len < 3)
     {
         if (tmp->x > num->mid)
             len++;
@@ -166,29 +216,35 @@ void return_bina(t_lst **lst_a, t_lst **lst_b, t_num *num)
 void end_sort(t_lst **lst_a, t_lst **lst_b, t_num *num)
 {
     t_lst *tmp;
+    int wow;
+    int i;
 
+    i = 3;
     tmp = *lst_b;
-    while (tmp != NULL)
+    wow = num->start;
+    while (tmp != NULL && wow > 0 && i > 0)
     {
         if (tmp->x > num->mid)
         {
-            pb(lst_b, &num->per);
+            pa(lst_a, lst_b);
             tmp = tmp->next;
             num->start--;
             num->lenop++;
+            wow--;
+            i--;
         }
-        else // нужно так переписать что бы не перезаписывать мои данные в отдельную функцию
+        else
         {
-            pb(lst_b, &num->ost);
-            tmp = tmp->next;
-            num->lenop++;
+            if (*lst_b != NULL)
+            {
+                tmp = tmp->next;
+                rb(lst_b);
+                num->lenop++;
+                wow--;
+            }
         }
     }
-    sort_lessfor_b(&num->per, num);
-    return_bina(lst_a, &num->per, num);
-    *lst_b = num->ost;
-    num->ost = NULL;
-    num->per = NULL;
+    sort_lessfor(lst_a);
     num->end = num->len - num->start;
 }
 
