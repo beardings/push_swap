@@ -52,8 +52,8 @@ t_num *createnum(int len)
     num->first_b = 0;
     num->lenop = 0;
     num->skira = 0;
-    num->per = NULL;
-    num->ost  = NULL;
+    num->pro = 0;
+    num->size = 0;
     return (num);
 }
 

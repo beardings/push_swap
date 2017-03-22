@@ -4,43 +4,6 @@
 
 #include "swap.h"
 
-
-/*void pb(t_lst **lst_a, t_lst **lst_b)
-{
-    t_lst *tmp;
-    t_lst *push;
-
-    push = createlst();
-    tmp = *lst_a;
-    if (*lst_a != NULL)
-    {
-        push->x = tmp->x;
-        tmp = tmp->next;
-        *lst_a = tmp;
-        push->next = *lst_b;
-        *lst_b = push;
-    }
-    write(1, "pb\n", 3);
-}
-
-void pa(t_lst **lst_a, t_lst **lst_b)
-{
-    t_lst *tmp;
-    t_lst *push;
-
-    push = createlst();
-    tmp = *lst_b;
-    if (*lst_b != NULL)
-    {
-        push->x = tmp->x;
-        tmp = tmp->next;
-        *lst_b = tmp;
-        push->next = *lst_a;
-        *lst_a = push;
-    }
-    write(1, "pa\n", 3);
-}*/
-
 void ra(t_lst **lst_a)
 {
     t_lst *tmp;
