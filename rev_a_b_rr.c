@@ -25,14 +25,18 @@ void rrb(t_lst **lst_b)
     t_lst *tmp;
     t_lst *res;
 
-    tmp = *lst_b;
-    while (tmp->next->next != NULL)
-        tmp = tmp->next;
-    res = tmp;
-    res = res->next;
-    tmp->next = NULL;
-    res->next = *lst_b;
-    *lst_b = res;
+    if (*lst_b != NULL)
+    {
+        tmp = *lst_b;
+        while (tmp->next->next != NULL)
+            tmp = tmp->next;
+        res = tmp;
+        res = res->next;
+        tmp->next = NULL;
+        res->next = *lst_b;
+        *lst_b = res;
+    }
+
     write(1, "rrb\n", 4);
 }
 

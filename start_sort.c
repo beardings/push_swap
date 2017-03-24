@@ -142,12 +142,13 @@ int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     int wow;
     int skiko;
 
+
     skiko = 0;
     wow = size;
     tmp = *lst_a;
     while (tmp != NULL && wow > 0)
     {
-        if (tmp->x <= (*num)->mid)
+        if (tmp->x < (*num)->mid)
         {
             pb(lst_a, lst_b);
             tmp = tmp->next;
@@ -196,7 +197,18 @@ int  findmid(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 
 void return_bina(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
-    while (*lst_b != NULL && size > 0)
+    while (size > 0)
+    {
+        pb(lst_a, lst_b);
+        (*num)->lenop++;
+        (*num)->end++;
+        size--;
+    }
+}
+
+void return_binb(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
+{
+    while (size > 0)
     {
         pa(lst_a, lst_b);
         (*num)->lenop++;
@@ -207,14 +219,14 @@ void return_bina(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 
 void sort_a(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
-    int skiko;
+    int skiko = 0;
 
     if (size > 3)
     {
         skiko = findmid(lst_a, lst_b, num, size);
         sort_a(lst_a, lst_b, num, size - skiko);
         sort_b(lst_a, lst_b, num, skiko);
-        return_bina(lst_b, lst_a, num, skiko);
+        return_binb(lst_a, lst_b, num, skiko);
     }
     else
         sort_lessfor_a(lst_a, size);
@@ -235,7 +247,7 @@ void sort_a(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 
 
 
-int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
+/*int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
     t_lst *tmp;
     int wow;
@@ -247,12 +259,12 @@ int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     i = 0;
     skiko = 0;
     wow = size;
-    tmp = *lst_a;
+    tmp = *lst_b;
     while (tmp != NULL && wow > 0)
     {
         if (size > 3)
         {
-            if (tmp->x <= (*num)->mid)
+            if (tmp->x > (*num)->mid)
             {
                 pa(lst_a, lst_b);
                 tmp = tmp->next;
@@ -292,6 +304,8 @@ int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     return (skiko);
 }
 
+
+
 int checkmid(t_num **num, t_lst **lst_b, int size)
 {
     int len;
@@ -323,39 +337,133 @@ int  findmid_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     int i;
     int www;
 
-    i = 0;
-    tmp = *lst_a;
-    max = tmp->x;
-    min = tmp->x;
-    if (size > 3)
+    www = 0;
+    if (*lst_b != NULL) {
+
+        i = 0;
+
+        tmp = *lst_b;
+        max = tmp->x;
+        min = tmp->x;
+        if (size > 3) {
+            while (tmp != NULL && size > i) {
+                if (tmp->x < min)
+                    if (tmp->x > (*num)->first_b)
+                        min = tmp->x;
+                if (tmp->x > max)
+                    if (tmp->x > (*num)->first_b)
+                        max = tmp->x;
+                tmp = tmp->next;
+                i++;
+            }
+            (*num)->mid = (max + min) / 2;
+            if ((checkmid(num, lst_b, size) == 1))
+                findmid_b(lst_a, lst_b, num, size);
+            www = begin_sort_b(lst_a, lst_b, num, size);
+            size -= www;
+            (*num)->first_b = 0;
+            findmid_b(lst_a, lst_b, num, size);
+        } else
+            www = begin_sort_b(lst_a, lst_b, num, size);
+    }
+    return (www);
+}*/
+
+
+int checkmid(t_num **num, t_lst **lst_b, int size)
+{
+    int len;
+    t_lst *tmp;
+
+    len = 0;
+    tmp = *lst_b;
+    while (tmp != NULL && size > 0)
     {
-        while (tmp != NULL &&  size > i)
+        if (tmp->x > (*num)->mid)
+            len++;
+        tmp = tmp->next;
+        size--;
+    }
+    if (len > 3)
+    {
+        (*num)->first_b = (*num)->mid;
+        return (1);
+    }
+    (*num)->pro = len;
+    return (0);
+}
+
+int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
+{
+    t_lst *tmp;
+    int skiko;
+    int i;
+
+    i = 0;
+    skiko = 0;
+    tmp = *lst_b;
+    while (tmp != NULL && size > 0)
+    {
+        if (tmp->x >= (*num)->mid)
         {
-            if (tmp->x < min)
-                if (tmp->x > (*num)->first_b)
-                    min = tmp->x;
-            if (tmp->x > max)
-                if (tmp->x > (*num)->first_b)
-                    max = tmp->x;
+            pa(lst_a, lst_b);
             tmp = tmp->next;
+            (*num)->start++;
+            (*num)->lenop++;
+            skiko++;
+            size--;
+        }
+        else
+        {
+            tmp = tmp->next;
+            rb(lst_b);
+            (*num)->skira++;
+            size--;
             i++;
         }
-        (*num)->mid = (max + min) / 2;
-        if ((checkmid(num, lst_b, size) == 1))
-            findmid_b(lst_a, lst_b, num, size);
-        www = begin_sort_b(lst_a, lst_b, num, size);
-        size -= www;
-        (*num)->first_b = 0;
-        findmid_b(lst_a, lst_b, num, size);
     }
-    else
-        www = begin_sort_b(lst_a, lst_b, num, size);
-    return (www);
+    while (i > 0)
+    {
+        rrb(lst_b);
+        i--;
+    }
+    sort_lessfor(lst_a, skiko);
+    return (skiko);
 }
+
+
+int  findmid_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
+{
+    int max;
+    int min;
+    t_lst *tmp;
+    int i;
+
+    i = 0;
+    tmp = *lst_b;
+    max = tmp->x;
+    min = tmp->x;
+    while (tmp != NULL &&  size > i)
+    {
+        if (tmp->x < min)
+            if (tmp->x < (*num)->first_b)
+                min = tmp->x;
+        if (tmp->x > max)
+            if (tmp->x > (*num)->first_b)
+                max = tmp->x;
+        tmp = tmp->next;
+        i++;
+    }
+    (*num)->mid = (max + min) / 2;
+    if ((checkmid(num, lst_b, size) == 1))
+        findmid_b(lst_a, lst_b, num, size);
+    return (begin_sort_b(lst_a, lst_b, num, size));
+}
+
 
 void sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
-    int skiko;
+    int skiko = 0;
 
     if (size > 3)
     {

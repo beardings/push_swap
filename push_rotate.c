@@ -56,10 +56,10 @@ void pb(t_lst **lst_a, t_lst **lst_b)
 {
     t_lst *lal;
 
-    lal = createlst();
-    lal->x = (*lst_a)->x;
     if ((*lst_a) != NULL)
     {
+        lal = createlst();
+        lal->x = (*lst_a)->x;
         *lst_a = (*lst_a)->next;
         pushres(lst_b, &lal);
     }
