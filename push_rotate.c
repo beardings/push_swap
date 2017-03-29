@@ -16,7 +16,7 @@ void ra(t_lst **lst_a)
     while (res->next != NULL)
         res = res->next;
     res->next = tmp;
-    //write(1, "ra\n", 3);
+    write(1, "ra\n", 3);
 }
 
 void rb(t_lst **lst_b)
@@ -35,7 +35,7 @@ void rb(t_lst **lst_b)
         res != NULL ? res->next = tmp : 0;
         res == NULL ? res = tmp : 0;
     }
-    //write(1, "rb\n", 3);
+    write(1, "rb\n", 3);
 }
 
 void rr(t_lst *lst_a, t_lst *lst_b)
@@ -63,7 +63,7 @@ void pb(t_lst **lst_a, t_lst **lst_b)
         *lst_a = (*lst_a)->next;
         pushres(lst_b, &lal);
     }
-    //write(1, "pb\n", 3);
+    write(1, "pb\n", 3);
 }
 
 void pa(t_lst **lst_a, t_lst **lst_b)
@@ -77,5 +77,5 @@ void pa(t_lst **lst_a, t_lst **lst_b)
         *lst_b = (*lst_b)->next;
         pushres(lst_a, &lol);
     }
-    //write(1, "pa\n", 3);
+    write(1, "pa\n", 3);
 }

@@ -25,6 +25,7 @@ typedef struct s_num
     int skira;
     int pro;
     int size;
+    int newsize;
 }               t_num;
 
 void    push_swap(int len, char **strs);
@@ -45,5 +46,6 @@ void    putout(t_lst *lst_a, t_lst *lst_b);
 void    sort_lessfor(t_lst **lst_a, int size);
 void    sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size);
 void    sort_a(t_lst **lst_a, t_lst **lst_b, t_num **num, int size);
+int     checklstsize(t_lst **lst_b);
 
 #endif

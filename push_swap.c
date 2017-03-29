@@ -4,6 +4,21 @@
 
 #include "swap.h"
 
+int checklstsize(t_lst **lst_b)
+{
+    t_lst *tmp;
+    int i;
+
+    i = 0;
+    tmp = *lst_b;
+    while (tmp)
+    {
+        tmp = tmp->next;
+        i++;
+    }
+    return (i);
+}
+
 t_lst *inlst(char *str, t_lst *list)
 {
     if (str == '\0')
@@ -54,6 +69,7 @@ t_num *createnum(int len)
     num->skira = 0;
     num->pro = 0;
     num->size = 0;
+    num->newsize = 0;
     return (num);
 }
 
