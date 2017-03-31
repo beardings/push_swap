@@ -4,7 +4,7 @@
 
 #include "swap.h"
 
-void ra(t_lst **lst_a)
+void ra(t_lst **lst_a, t_num **num)
 {
     t_lst *tmp;
     t_lst *res;
@@ -17,9 +17,11 @@ void ra(t_lst **lst_a)
         res = res->next;
     res->next = tmp;
     write(1, "ra\n", 3);
+    (*num)->com = neednextlst((*num)->com, 1);
+    (*num)->lenop++;
 }
 
-void rb(t_lst **lst_b)
+void rb(t_lst **lst_b, t_num **num)
 {
     t_lst *tmp;
     t_lst *res;
@@ -36,12 +38,14 @@ void rb(t_lst **lst_b)
         res == NULL ? res = tmp : 0;
     }
     write(1, "rb\n", 3);
+    (*num)->com = neednextlst((*num)->com, 2);
+    (*num)->lenop++;
 }
 
-void rr(t_lst *lst_a, t_lst *lst_b)
+void rr(t_lst *lst_a, t_lst *lst_b, t_num **num)
 {
-    ra(&lst_a);
-    rb(&lst_b);
+    ra(&lst_a, num);
+    rb(&lst_b, num);
 }
 
 
@@ -52,7 +56,7 @@ void pushres(t_lst **lst, t_lst **lil)
     *lst = *lil;
 }
 
-void pb(t_lst **lst_a, t_lst **lst_b)
+void pb(t_lst **lst_a, t_lst **lst_b, t_num **num)
 {
     t_lst *lal;
 
@@ -64,9 +68,11 @@ void pb(t_lst **lst_a, t_lst **lst_b)
         pushres(lst_b, &lal);
     }
     write(1, "pb\n", 3);
+    (*num)->com = neednextlst((*num)->com, 4);
+    (*num)->lenop++;
 }
 
-void pa(t_lst **lst_a, t_lst **lst_b)
+void pa(t_lst **lst_a, t_lst **lst_b, t_num **num)
 {
     t_lst *lol;
 
@@ -78,4 +84,6 @@ void pa(t_lst **lst_a, t_lst **lst_b)
         pushres(lst_a, &lol);
     }
     write(1, "pa\n", 3);
+    (*num)->com = neednextlst((*num)->com, 3);
+    (*num)->lenop++;
 }

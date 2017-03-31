@@ -4,7 +4,7 @@
 
 #include "swap.h"
 
-void rra(t_lst **lst_a)
+void rra(t_lst **lst_a, t_num **num)
 {
     t_lst *tmp;
     t_lst *res;
@@ -21,9 +21,11 @@ void rra(t_lst **lst_a)
         *lst_a = res;
     }
     write(1, "rra\n", 4);
+    (*num)->com = neednextlst((*num)->com, 7);
+    (*num)->lenop++;
 }
 
-void rrb(t_lst **lst_b)
+void rrb(t_lst **lst_b, t_num **num)
 {
     t_lst *tmp;
     t_lst *res;
@@ -40,10 +42,12 @@ void rrb(t_lst **lst_b)
         *lst_b = res;
     }
     write(1, "rrb\n", 4);
+    (*num)->com = neednextlst((*num)->com, 8);
+    (*num)->lenop++;
 }
 
-void rrr(t_lst *lst_a, t_lst *lst_b)
+void rrr(t_lst *lst_a, t_lst *lst_b, t_num **num)
 {
-    rra(&lst_a);
-    rrb(&lst_b);
+    rra(&lst_a, num);
+    rrb(&lst_b, num);
 }

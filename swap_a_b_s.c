@@ -4,7 +4,7 @@
 
 #include "swap.h"
 
-void sa(t_lst *lst_a)
+void sa(t_lst *lst_a, t_num **num)
 {
     t_lst *tmp;
     t_lst swap;
@@ -18,9 +18,11 @@ void sa(t_lst *lst_a)
         tmp->x = swap.x;
     }
     write(1, "sa\n", 3);
+    (*num)->com = neednextlst((*num)->com, 5);
+    (*num)->lenop++;
 }
 
-void sb(t_lst *lst_b)
+void sb(t_lst *lst_b, t_num **num)
 {
     t_lst *tmp;
     t_lst swap;
@@ -34,10 +36,12 @@ void sb(t_lst *lst_b)
         tmp->x = swap.x;
     }
     write(1, "sb\n", 3);
+    (*num)->com = neednextlst((*num)->com, 6);
+    (*num)->lenop++;
 }
 
-void ss(t_lst *lst_a, t_lst *lst_b)
+void ss(t_lst *lst_a, t_lst *lst_b, t_num **num)
 {
-    sa(lst_a);
-    sb(lst_b);
+    sa(lst_a, num);
+    sb(lst_b, num);
 }

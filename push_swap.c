@@ -70,7 +70,86 @@ t_num *createnum(int len)
     num->pro = 0;
     num->size = 0;
     num->newsize = 0;
+    num->com = createlst();
     return (num);
+}
+
+t_lst *neednextlst(t_lst *lst, int com)
+{
+    t_lst *head;
+
+    head = lst;
+    while (lst->next != NULL)
+        lst = lst->next;
+    lst->x = com;
+    lst->next = createlst();
+    lst = head;
+    return (lst);
+}
+
+int lenlst(t_lst **lst)
+{
+    int i;
+    t_lst *tmp;
+
+    tmp = *lst;
+    i = 0;
+    while (tmp->next != NULL)
+    {
+        printf("\ncl: %d", tmp->x);
+        i++;
+        tmp = tmp->next;
+    }
+    return (i);
+}
+
+
+void lstdel(t_lst **lst)
+{
+    t_lst *a;
+    t_lst *b;
+
+    a = (*lst)->next->next;
+    b = (*lst)->next;
+    (*lst)->next = (*lst)->next->next->next;
+    free(a);
+    free(b);
+}
+
+t_lst *cleanlist(t_lst **head)
+{
+    t_lst *lst;
+    int k;
+
+    k = 0;
+    lst = *head;
+    while (lst->next != NULL)
+    {
+        if ((lst->next->x == 1 && lst->next->next->x == 7) || (lst->next->x == 7 && lst->next->next->x == 1))
+        {
+            lstdel(&lst);
+            k += 2;
+        }
+        if ((lst->next->x == 2 && lst->next->next->x == 8) || (lst->next->x == 8 && lst->next->next->x == 2))
+        {
+            lstdel(&lst);
+            k += 2;
+        }
+        if ((lst->next->x == 3 && lst->next->next->x == 4) || (lst->next->x == 4 && lst->next->next->x == 3))
+        {
+            lstdel(&lst);
+            k += 2;
+        }
+        if ((lst->next->x == 5 && lst->next->next->x == 6) || (lst->next->x == 6 && lst->next->next->x == 5))
+        {
+            lstdel(&lst);
+            k += 2;
+        }
+        lst = lst->next;
+    }
+    if (k > 0)
+        cleanlist(head);
+    return (*head);
 }
 
 void push_swap(int len, char **strs)
@@ -97,5 +176,7 @@ void push_swap(int len, char **strs)
     }
     lst_a = head;
     start_sort(lst_a, lst_b, num);
+    num->com =  cleanlist(&(num->com));
     printf("\n\nskiko: %d", num->lenop);
+    printf("\n\nlstlen: %d", lenlst(&(num->com)));
 }

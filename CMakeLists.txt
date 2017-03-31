@@ -9,5 +9,7 @@ set(SOURCE_FILES main.c
         swap_a_b_s.c /
         push_rotate.c /
         rev_a_b_rr.c /
-        start_sort.c)
+        start_sort.c /
+        libft/ft_bzero.c /
+        libft/ft_memset.c)
 add_executable(push_swap ${SOURCE_FILES})

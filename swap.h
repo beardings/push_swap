@@ -26,26 +26,30 @@ typedef struct s_num
     int pro;
     int size;
     int newsize;
+    t_lst *com;
 }               t_num;
 
 void    push_swap(int len, char **strs);
-void    sa(t_lst *lst_a);
-void    sb(t_lst *lst_b);
-void    ss(t_lst *lst_a, t_lst *lst_b);
+void    sa(t_lst *lst_a, t_num **num);
+void    sb(t_lst *lst_b, t_num **num);
+void    ss(t_lst *lst_a, t_lst *lst_b, t_num **num);
 t_lst   *createlst(void);
-void    pb(t_lst **lst_a, t_lst **lst_b);
-void    pa(t_lst **lst_a, t_lst **lst_b);
-void    rra(t_lst **lst_a);
-void    rrb(t_lst **lst_b);
-void    rrr(t_lst *lst_a, t_lst *lst_b);
-void    ra(t_lst **lst_a);
-void    rb(t_lst **lst_b);
-void    rr(t_lst *lst_a, t_lst *lst_b);
+void    pb(t_lst **lst_a, t_lst **lst_b, t_num **num);
+void    pa(t_lst **lst_a, t_lst **lst_b, t_num **num);
+void    rra(t_lst **lst_a, t_num **num);
+void    rrb(t_lst **lst_b, t_num **num);
+void    rrr(t_lst *lst_a, t_lst *lst_b, t_num **num);
+void    ra(t_lst **lst_a, t_num **num);
+void    rb(t_lst **lst_b, t_num **num);
+void    rr(t_lst *lst_a, t_lst *lst_b, t_num **num);
 void    start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num);
 void    putout(t_lst *lst_a, t_lst *lst_b);
-void    sort_lessfor(t_lst **lst_a, int size);
+void    sort_lessfor(t_lst **lst_a, int size, t_num **num);
 void    sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size);
 void    sort_a(t_lst **lst_a, t_lst **lst_b, t_num **num, int size);
 int     checklstsize(t_lst **lst_b);
+int     itismid_b(t_lst **lst_b, int size);
+t_lst   *neednextlst(t_lst *lst, int com);
+int         lenlst(t_lst **lst);
 
 #endif
