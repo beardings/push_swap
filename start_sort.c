@@ -159,9 +159,69 @@ void sort_lessfor(t_lst **lst, int size, t_num **num)
     }
 }
 
+int checkkol(t_lst **lst_a, t_num **num)
+{
+    int i;
+    t_lst *tmp;
+
+    i = 0;
+    tmp = *lst_a;
+    while (tmp != NULL)
+    {
+        if (tmp->x < (*num)->mid)
+            i++;
+        tmp = tmp->next;
+    }
+    return (i);
+}
 
 int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
+/*    t_lst *tmp;
+    int wow;
+    int skiko;
+    int i;
+    int k;
+
+    k = 0;
+    i = 0;
+    wow = checkkol(lst_a, num);
+    skiko = wow;
+    tmp = *lst_a;
+    while (tmp != NULL && wow > 0)
+    {
+        if (tmp->x < (*num)->mid)
+        {
+            pb(lst_a, lst_b, num);
+            tmp = tmp->next;
+            (*num)->start++;
+            wow--;
+        }
+        else
+        {
+            tmp = tmp->next;
+            ra(lst_a, num);
+            i++;
+        }
+        k++;
+    }
+    size = size - k;
+    if (size < i && i > 2 && size > 1)
+    {
+        while (size > 0)
+        {
+            ra(lst_a, num);
+            size--;
+        }
+    }
+    else if (size >= i || size < 2)
+    {
+        while (i > 0)
+        {
+            rra(lst_a, num);
+            i--;
+        }
+    }*/
     t_lst *tmp;
     int wow;
     int skiko;
@@ -250,25 +310,6 @@ int itismid(t_lst **lst_a, int size)
 
 int  findmid(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
-/*    int max;
-    int min;
-    t_lst *tmp;
-    int i;
-
-    i = 0;
-    tmp = *lst_a;
-    max = tmp->x;
-    min = tmp->x;
-    while (tmp != NULL &&  size > i)
-    {
-        if (tmp->x < min)
-            min = tmp->x;
-        if (tmp->x > max)
-            max = tmp->x;
-        tmp = tmp->next;
-        i++;
-    }
-    (*num)->mid = (max + min) / 2;*/
     (*num)->mid = itismid(lst_a, size);
     return (begin_sort(lst_a, lst_b, num, size));
 }
@@ -308,29 +349,6 @@ void sort_a(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     else
         sort_lessfor(lst_a, size, num);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 int checkmid(t_num **num, t_lst **lst_b, int size)
 {
@@ -395,23 +413,6 @@ int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 
 void  findmid_b_n(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
-/*   int min;
-    int max;
-    t_lst *tmp;
-    int i;
-
-    i = 0;
-    tmp = *lst_b;
-    max = tmp->x;
-    min = (*num)->first_b;
-    while (size > i)
-    {
-        if (tmp->x > max)
-            max = tmp->x;
-        tmp = tmp->next;
-        i++;
-    }
-    (*num)->mid = (max + min) / 2;*/
     size  = size / 2;
     (*num)->mid = itismid_b(lst_b, size);
     if ((checkmid(num, lst_b, size) == 1))
@@ -447,26 +448,6 @@ int itismid_b(t_lst **lst_b, int size)
 
 int  findmid_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
-/*    int max;
-    int min;
-    t_lst *tmp;
-    int i;
-
-    i = 0;
-    tmp = *lst_b;
-    max = tmp->x;
-    min = tmp->x;
-    while (tmp != NULL &&  size > i)
-    {
-
-        if (tmp->x < min)
-                min = tmp->x;
-        if (tmp->x > max)
-                max = tmp->x;
-        tmp = tmp->next;
-        i++;
-    }
-    (*num)->mid = (max + min) / 2;*/
     (*num)->mid = itismid_b(lst_b, size);
     if ((checkmid(num, lst_b, size) == 1))
         findmid_b_n(lst_a, lst_b, num, size);
@@ -489,7 +470,7 @@ void sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
         sort_lessfor_b(lst_b, size, num);
 }
 
-void start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num)
+t_lst *start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num)
 {
     if (num->len > 4)
         sort_a(&lst_a, &lst_b, &num, num->len);
@@ -497,5 +478,6 @@ void start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num)
         sort_lessfor_a(&lst_a, num->len, &num);
     write(1, "\n", 1);
     putout(lst_a, lst_b);
+    return (lst_a);
 }
 

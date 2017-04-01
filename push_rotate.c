@@ -16,7 +16,7 @@ void ra(t_lst **lst_a, t_num **num)
     while (res->next != NULL)
         res = res->next;
     res->next = tmp;
-    write(1, "ra\n", 3);
+    //write(1, "ra\n", 3);
     (*num)->com = neednextlst((*num)->com, 1);
     (*num)->lenop++;
 }
@@ -37,7 +37,7 @@ void rb(t_lst **lst_b, t_num **num)
         res != NULL ? res->next = tmp : 0;
         res == NULL ? res = tmp : 0;
     }
-    write(1, "rb\n", 3);
+    //write(1, "rb\n", 3);
     (*num)->com = neednextlst((*num)->com, 2);
     (*num)->lenop++;
 }
@@ -67,7 +67,7 @@ void pb(t_lst **lst_a, t_lst **lst_b, t_num **num)
         *lst_a = (*lst_a)->next;
         pushres(lst_b, &lal);
     }
-    write(1, "pb\n", 3);
+    //write(1, "pb\n", 3);
     (*num)->com = neednextlst((*num)->com, 4);
     (*num)->lenop++;
 }
@@ -83,7 +83,7 @@ void pa(t_lst **lst_a, t_lst **lst_b, t_num **num)
         *lst_b = (*lst_b)->next;
         pushres(lst_a, &lol);
     }
-    write(1, "pa\n", 3);
+    //write(1, "pa\n", 3);
     (*num)->com = neednextlst((*num)->com, 3);
     (*num)->lenop++;
 }

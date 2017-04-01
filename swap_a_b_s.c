@@ -17,7 +17,7 @@ void sa(t_lst *lst_a, t_num **num)
         lst_a->x = tmp->x;
         tmp->x = swap.x;
     }
-    write(1, "sa\n", 3);
+    //write(1, "sa\n", 3);
     (*num)->com = neednextlst((*num)->com, 5);
     (*num)->lenop++;
 }
@@ -35,7 +35,7 @@ void sb(t_lst *lst_b, t_num **num)
         lst_b->x = tmp->x;
         tmp->x = swap.x;
     }
-    write(1, "sb\n", 3);
+    //write(1, "sb\n", 3);
     (*num)->com = neednextlst((*num)->com, 6);
     (*num)->lenop++;
 }

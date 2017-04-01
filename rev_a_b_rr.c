@@ -20,7 +20,7 @@ void rra(t_lst **lst_a, t_num **num)
         res->next = *lst_a;
         *lst_a = res;
     }
-    write(1, "rra\n", 4);
+    //write(1, "rra\n", 4);
     (*num)->com = neednextlst((*num)->com, 7);
     (*num)->lenop++;
 }
@@ -41,7 +41,7 @@ void rrb(t_lst **lst_b, t_num **num)
         res->next = *lst_b;
         *lst_b = res;
     }
-    write(1, "rrb\n", 4);
+    //write(1, "rrb\n", 4);
     (*num)->com = neednextlst((*num)->com, 8);
     (*num)->lenop++;
 }

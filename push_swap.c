@@ -96,7 +96,22 @@ int lenlst(t_lst **lst)
     i = 0;
     while (tmp->next != NULL)
     {
-        printf("\ncl: %d", tmp->x);
+        if (tmp->x == 1)
+            printf("\ncl: %s", "ra");
+        else if (tmp->x == 2)
+            printf("\ncl: %s", "rb");
+        else if (tmp->x == 3)
+            printf("\ncl: %s", "pa");
+        else if (tmp->x == 4)
+            printf("\ncl: %s", "pb");
+        else if (tmp->x == 5)
+            printf("\ncl: %s", "sa");
+        else if (tmp->x == 6)
+            printf("\ncl: %s", "sb");
+        else if (tmp->x == 7)
+            printf("\ncl: %s", "rra");
+        else if (tmp->x == 8)
+            printf("\ncl: %s", "rrb");
         i++;
         tmp = tmp->next;
     }
@@ -116,6 +131,15 @@ void lstdel(t_lst **lst)
     free(b);
 }
 
+void lstdelone(t_lst **lst)
+{
+    t_lst *a;
+
+    a = (*lst)->next->next;
+    (*lst)->next->next = (*lst)->next->next->next;
+    free(a);
+}
+
 t_lst *cleanlist(t_lst **head)
 {
     t_lst *lst;
@@ -130,26 +154,57 @@ t_lst *cleanlist(t_lst **head)
             lstdel(&lst);
             k += 2;
         }
-        if ((lst->next->x == 2 && lst->next->next->x == 8) || (lst->next->x == 8 && lst->next->next->x == 2))
+        else if ((lst->next->x == 2 && lst->next->next->x == 8) || (lst->next->x == 8 && lst->next->next->x == 2))
         {
             lstdel(&lst);
             k += 2;
         }
-        if ((lst->next->x == 3 && lst->next->next->x == 4) || (lst->next->x == 4 && lst->next->next->x == 3))
+        else if ((lst->next->x == 3 && lst->next->next->x == 4) || (lst->next->x == 4 && lst->next->next->x == 3))
         {
             lstdel(&lst);
             k += 2;
         }
-        if ((lst->next->x == 5 && lst->next->next->x == 6) || (lst->next->x == 6 && lst->next->next->x == 5))
+        else if ((lst->next->x == 5 && lst->next->next->x == 6) || (lst->next->x == 6 && lst->next->next->x == 5))
         {
             lstdel(&lst);
             k += 2;
+        }
+        else if (lst->next->x == 5 && lst->next->next->x == 5)
+        {
+            lstdelone(&lst);
+            k++;
+        }
+        else if (lst->next->x == 6 && lst->next->next->x == 6)
+        {
+            lstdelone(&lst);
+            k++;
         }
         lst = lst->next;
     }
     if (k > 0)
         cleanlist(head);
     return (*head);
+}
+
+void checkitsort(t_lst **lst_a)
+{
+    t_lst *tmp;
+
+    tmp = *lst_a;
+    while (tmp->next != NULL)
+    {
+        if (tmp->x < tmp->next->x)
+            tmp = tmp->next;
+        else
+        {
+            printf("\n\nsad: KO");
+            printf("\n %d", tmp->x);
+            printf("\n %d", tmp->next->x);
+            break ;
+        }
+    }
+    if (tmp->next == NULL)
+        printf("\n\nit is sort: OK");
 }
 
 void push_swap(int len, char **strs)
@@ -175,8 +230,9 @@ void push_swap(int len, char **strs)
         i++;
     }
     lst_a = head;
-    start_sort(lst_a, lst_b, num);
+    lst_a = start_sort(lst_a, lst_b, num);
     num->com =  cleanlist(&(num->com));
-    printf("\n\nskiko: %d", num->lenop);
+    checkitsort(&lst_a);
+    printf("\nskiko: %d\n", num->lenop);
     printf("\n\nlstlen: %d", lenlst(&(num->com)));
 }

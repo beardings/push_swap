@@ -42,7 +42,7 @@ void    rrr(t_lst *lst_a, t_lst *lst_b, t_num **num);
 void    ra(t_lst **lst_a, t_num **num);
 void    rb(t_lst **lst_b, t_num **num);
 void    rr(t_lst *lst_a, t_lst *lst_b, t_num **num);
-void    start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num);
+t_lst   *start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num);
 void    putout(t_lst *lst_a, t_lst *lst_b);
 void    sort_lessfor(t_lst **lst_a, int size, t_num **num);
 void    sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size);
