@@ -14,30 +14,30 @@ void sort_lessfor_a(t_lst **lst, int size, t_num **num)
         if (size == 2)
         {
             if (tmp->x > tmp->next->x)
-                sa(*lst, num);
+                sa(*lst, num, 1);
         }
         if (size == 3)
         {
             if (tmp->x > tmp->next->x)
             {
                 if ((tmp->x < tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
-                    sa(*lst, num);
+                    sa(*lst, num, 1);
                 else if ((tmp->x > tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
                 {
-                    ra(lst, num);
-                    sa(*lst, num);
+                    ra(lst, num, 1);
+                    sa(*lst, num, 1);
                 }
                 else if ((tmp->x > tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
-                    ra(lst, num);
+                    ra(lst, num, 1);
             }
             else if (tmp->x < tmp->next->x)
             {
                 if ((tmp->x > tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
-                    rra(lst, num);
+                    rra(lst, num, 1);
                 else if ((tmp->x < tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
                 {
-                    sa(*lst, num);
-                    ra(lst, num);
+                    sa(*lst, num, 1);
+                    ra(lst, num, 1);
                 }
             }
         }
@@ -54,7 +54,7 @@ void sort_lessfor_b(t_lst **lst, int size, t_num **num)
         if (size == 2)
         {
             if (tmp->x < tmp->next->x)
-                sb(*lst, num);
+                sb(*lst, num, 1);
         }
         if (size == 3)
         {
@@ -62,42 +62,40 @@ void sort_lessfor_b(t_lst **lst, int size, t_num **num)
             {
                 if ((tmp->x < tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
                 {
-                    rb(lst, num);
-                    sb(*lst, num);
-                    rrb(lst, num);
-                    sb(*lst, num);
-                    rb(lst, num);
-                    sb(*lst, num);
-                    rrb(lst, num);
+                    rb(lst, num, 1);
+                    sb(*lst, num, 1);
+                    rrb(lst, num, 1);
+                    sb(*lst, num, 1);
+
                 }
                 else if ((tmp->x > tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
                 {
-                    sb(*lst, num);
+                    sb(*lst, num, 1);
                 }
                 else if ((tmp->x < tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
                 {
-                    sb(*lst, num);
-                    rb(lst, num);
-                    sb(*lst, num);
-                    rrb(lst, num);
+                    sb(*lst, num, 1);
+                    rb(lst, num, 1);
+                    sb(*lst, num, 1);
+                    rrb(lst, num, 1);
                 }
             }
             else if (tmp->x > tmp->next->x)
             {
                 if ((tmp->x > tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
                 {
-                    rb(lst, num);
-                    sb(*lst, num);
-                    rrb(lst, num);
+                    rb(lst, num, 1);
+                    sb(*lst, num, 1);
+                    rrb(lst, num, 1);
                 }
                 else if ((tmp->x < tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
-                    rrb(lst, num);
+                    rrb(lst, num, 1);
                 else if ((tmp->x < tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
                 {
-                    rb(lst, num);
-                    sb(*lst, num);
-                    rrb(lst, num);
-                    sb(*lst, num);
+                    rb(lst, num, 1);
+                    sb(*lst, num, 1);
+                    rrb(lst, num, 1);
+                    sb(*lst, num, 1);
                 }
             }
         }
@@ -112,47 +110,45 @@ void sort_lessfor(t_lst **lst, int size, t_num **num)
     if (tmp != NULL)
     {
         if (size == 1)
-            tmp->x > tmp->next->x ? sa(*lst, num) : 0;
+            tmp->x > tmp->next->x ? sa(*lst, num, 1) : 0;
         if (size == 2)
-            tmp->x > tmp->next->x ? sa(*lst, num) : 0;
+            tmp->x > tmp->next->x ? sa(*lst, num, 1) : 0;
         if (size == 3)
         {
             if (tmp->x > tmp->next->x)
             {
                 if ((tmp->x < tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
-                    sa(*lst, num);
+                    sa(*lst, num, 1);
                 else if ((tmp->x > tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
                 {
-                    ra(lst, num);
-                    sa(*lst, num);
-                    rra(lst, num);
-                    sa(*lst, num);
-                    ra(lst, num);
-                    sa(*lst, num);
-                    rra(lst, num);
+                    sa(*lst, num, 1);
+                    ra(lst, num, 1);
+                    sa(*lst, num, 1);
+                    rra(lst, num, 1);
+                    sa(*lst, num, 1);
                 }
                 else if ((tmp->x > tmp->next->next->x) && (tmp->next->x < tmp->next->next->x))
                 {
-                    sa(*lst, num);
-                    ra(lst, num);
-                    sa(*lst, num);
-                    rra(lst, num);
+                    sa(*lst, num, 1);
+                    ra(lst, num, 1);
+                    sa(*lst, num, 1);
+                    rra(lst, num, 1);
                 }
             }
             else if (tmp->x < tmp->next->x)
             {
                 if ((tmp->x > tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
                 {
-                    ra(lst, num);
-                    sa(*lst, num);
-                    rra(lst, num);
-                    sa(*lst, num);
+                    ra(lst, num, 1);
+                    sa(*lst, num, 1);
+                    rra(lst, num, 1);
+                    sa(*lst, num, 1);
                 }
                 else if ((tmp->x < tmp->next->next->x) && (tmp->next->x > tmp->next->next->x))
                 {
-                    ra(lst, num);
-                    sa(*lst, num);
-                    rra(lst, num);
+                    ra(lst, num, 1);
+                    sa(*lst, num, 1);
+                    rra(lst, num, 1);
                 }
             }
         }
@@ -177,7 +173,7 @@ int checkkol(t_lst **lst_a, t_num **num)
 
 int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
-/*    t_lst *tmp;
+   t_lst *tmp;
     int wow;
     int skiko;
     int i;
@@ -192,7 +188,7 @@ int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     {
         if (tmp->x < (*num)->mid)
         {
-            pb(lst_a, lst_b, num);
+            pb(lst_a, lst_b, num, 1);
             tmp = tmp->next;
             (*num)->start++;
             wow--;
@@ -200,7 +196,7 @@ int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
         else
         {
             tmp = tmp->next;
-            ra(lst_a, num);
+            ra(lst_a, num, 1);
             i++;
         }
         k++;
@@ -210,7 +206,7 @@ int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     {
         while (size > 0)
         {
-            ra(lst_a, num);
+            ra(lst_a, num, 1);
             size--;
         }
     }
@@ -218,11 +214,11 @@ int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     {
         while (i > 0)
         {
-            rra(lst_a, num);
+            rra(lst_a, num, 1);
             i--;
         }
-    }*/
-    t_lst *tmp;
+    }
+/*    t_lst *tmp;
     int wow;
     int skiko;
     int i;
@@ -236,7 +232,7 @@ int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     {
         if (tmp->x < (*num)->mid)
         {
-            pb(lst_a, lst_b, num);
+            pb(lst_a, lst_b, num, 1);
             tmp = tmp->next;
             (*num)->start++;
             skiko++;
@@ -245,16 +241,16 @@ int  begin_sort(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
         else
         {
             tmp = tmp->next;
-            ra(lst_a, num);
+            ra(lst_a, num, 1);
             wow--;
             i++;
         }
     }
     while (i > 0)
     {
-        rra(lst_a, num);
+        rra(lst_a, num, 1);
         i--;
-    }
+    }*/
     (*num)->end = (*num)->len - (*num)->start;
     return (skiko);
 }
@@ -319,7 +315,7 @@ void return_bina(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
     while (size > 0)
     {
-        pb(lst_a, lst_b, num);
+        pb(lst_a, lst_b, num, 1);
         (*num)->end++;
         size--;
     }
@@ -329,7 +325,7 @@ void return_binb(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
     while (size > 0)
     {
-        pa(lst_a, lst_b, num);
+        pa(lst_a, lst_b, num, 1);
         (*num)->end++;
         size--;
     }
@@ -339,7 +335,7 @@ void sort_a(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
     int skiko = 0;
 
-    if (size > 3)
+    if (size > 2)
     {
         skiko = findmid(lst_a, lst_b, num, size);
         sort_a(lst_a, lst_b, num, size - skiko);
@@ -386,7 +382,7 @@ int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
     {
         if (tmp->x >= (*num)->mid)
         {
-            pa(lst_a, lst_b, num);
+            pa(lst_a, lst_b, num, 1);
             tmp = tmp->next;
             (*num)->start++;
             skiko++;
@@ -395,14 +391,14 @@ int  begin_sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
         else
         {
             tmp = tmp->next;
-            rb(lst_b, num);
+            rb(lst_b, num, 1);
             size--;
             i++;
         }
     }
     while (i > 0)
     {
-        rrb(lst_b, num);
+        rrb(lst_b, num, 1);
         i--;
     }
     sort_lessfor(lst_a, skiko, num);
@@ -459,25 +455,30 @@ void sort_b(t_lst **lst_a, t_lst **lst_b, t_num **num, int size)
 {
     int skiko = 0;
 
-    if (size > 3)
+    if (size > 2)
     {
         skiko = findmid_b(lst_a, lst_b, num, size);
-        sort_b(lst_a, lst_b, num, size - skiko);
         sort_a(lst_a, lst_b, num, skiko);
+        sort_b(lst_a, lst_b, num, size - skiko);
         return_bina(lst_a, lst_b, num, skiko);
     }
     else
         sort_lessfor_b(lst_b, size, num);
 }
 
-t_lst *start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num)
+void start_sort(t_lst *lst_a, t_lst *lst_b, t_num *num)
 {
     if (num->len > 4)
         sort_a(&lst_a, &lst_b, &num, num->len);
     else if (num->len < 4)
         sort_lessfor_a(&lst_a, num->len, &num);
     write(1, "\n", 1);
-    putout(lst_a, lst_b);
-    return (lst_a);
+    putout(&lst_a, &lst_b);
+    num->com = cleanlist(&(num->com));
+    num->com = enotherclean(&(num->com));
+    num->com = cleanlistnext(&(num->com));
+    checkitsort(&lst_a);
+    printf("\nskiko: %d\n", num->lenop);
+    printf("\n\nlstlen: %d\n\n", lenlst(&(num->com)));
 }
 

@@ -4,44 +4,49 @@
 
 #include "swap.h"
 
-void sa(t_lst *lst_a, t_num **num)
+void sa(t_lst *lst_a, t_num **num, int i)
 {
     t_lst *tmp;
     t_lst swap;
-
-    tmp = lst_a;
-    if (tmp->next)
+    if (lst_a != NULL)
     {
-        swap.x = lst_a->x;
-        tmp = tmp->next;
-        lst_a->x = tmp->x;
-        tmp->x = swap.x;
+        tmp = lst_a;
+        if (tmp->next)
+        {
+            swap.x = lst_a->x;
+            tmp = tmp->next;
+            lst_a->x = tmp->x;
+            tmp->x = swap.x;
+            i == 1 ? (*num)->com = neednextlst((*num)->com, 5) : 0;
+            i == 1 ? (*num)->lenop++ : 0;
+        }
     }
     //write(1, "sa\n", 3);
-    (*num)->com = neednextlst((*num)->com, 5);
-    (*num)->lenop++;
 }
 
-void sb(t_lst *lst_b, t_num **num)
+void sb(t_lst *lst_b, t_num **num, int i)
 {
     t_lst *tmp;
     t_lst swap;
 
-    tmp = lst_b;
-    if (tmp->next)
+    if (lst_b != NULL)
     {
-        swap.x = lst_b->x;
-        tmp = tmp->next;
-        lst_b->x = tmp->x;
-        tmp->x = swap.x;
+        tmp = lst_b;
+        if (tmp->next)
+        {
+            swap.x = lst_b->x;
+            tmp = tmp->next;
+            lst_b->x = tmp->x;
+            tmp->x = swap.x;
+            i == 1 ? (*num)->com = neednextlst((*num)->com, 6) : 0;
+            i == 1 ? (*num)->lenop++ : 0;
+        }
     }
     //write(1, "sb\n", 3);
-    (*num)->com = neednextlst((*num)->com, 6);
-    (*num)->lenop++;
 }
 
-void ss(t_lst *lst_a, t_lst *lst_b, t_num **num)
+void ss(t_lst *lst_a, t_lst *lst_b, t_num **num, int i)
 {
-    sa(lst_a, num);
-    sb(lst_b, num);
+    sa(lst_a, num, i);
+    sb(lst_b, num, i);
 }

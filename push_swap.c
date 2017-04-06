@@ -40,14 +40,19 @@ t_lst *createlst(void)
     return (list);
 }
 
-void putout(t_lst *lst_a, t_lst *lst_b)
+void putout(t_lst **lst_a, t_lst **lst_b)
 {
-    while (lst_a != NULL || lst_b != NULL)
+    t_lst *lst_aa;
+    t_lst *lst_bb;
+
+    lst_aa = *lst_a;
+    lst_bb = *lst_b;
+    while (lst_aa != NULL || lst_bb != NULL)
     {
-        lst_a != NULL ? printf("%d", lst_a->x) : printf("  ");
-        lst_b != NULL ? printf("    %d", lst_b->x) : 0;
-        lst_b != NULL ? lst_b = lst_b->next : 0;
-        lst_a != NULL ? lst_a = lst_a->next : 0;
+        lst_aa != NULL ? printf("%d", lst_aa->x) : printf("  ");
+        lst_bb != NULL ? printf("    %d", lst_bb->x) : 0;
+        lst_bb != NULL ? lst_bb = lst_bb->next : 0;
+        lst_aa != NULL ? lst_aa = lst_aa->next : 0;
         printf("\n");
     }
     printf("__   __\n");
@@ -97,21 +102,27 @@ int lenlst(t_lst **lst)
     while (tmp->next != NULL)
     {
         if (tmp->x == 1)
-            printf("\ncl: %s", "ra");
+            printf("\n%s", "ra");
         else if (tmp->x == 2)
-            printf("\ncl: %s", "rb");
+            printf("\n%s", "rb");
         else if (tmp->x == 3)
-            printf("\ncl: %s", "pa");
+            printf("\n%s", "pa");
         else if (tmp->x == 4)
-            printf("\ncl: %s", "pb");
+            printf("\n%s", "pb");
         else if (tmp->x == 5)
-            printf("\ncl: %s", "sa");
+            printf("\n%s", "sa");
         else if (tmp->x == 6)
-            printf("\ncl: %s", "sb");
+            printf("\n%s", "sb");
         else if (tmp->x == 7)
-            printf("\ncl: %s", "rra");
+            printf("\n%s", "rra");
         else if (tmp->x == 8)
-            printf("\ncl: %s", "rrb");
+            printf("\n%s", "rrb");
+        else if (tmp->x == 9)
+            printf("\n%s", "rr");
+        else if (tmp->x == 10)
+            printf("\n%s", "ss");
+        else if (tmp->x == 9)
+            printf("\n%s", "rrr");
         i++;
         tmp = tmp->next;
     }
@@ -164,11 +175,6 @@ t_lst *cleanlist(t_lst **head)
             lstdel(&lst);
             k += 2;
         }
-        else if ((lst->next->x == 5 && lst->next->next->x == 6) || (lst->next->x == 6 && lst->next->next->x == 5))
-        {
-            lstdel(&lst);
-            k += 2;
-        }
         else if (lst->next->x == 5 && lst->next->next->x == 5)
         {
             lstdelone(&lst);
@@ -186,25 +192,189 @@ t_lst *cleanlist(t_lst **head)
     return (*head);
 }
 
+
+t_lst *enotherclean(t_lst **lst)
+{
+    t_lst *wow;
+    int k;
+
+    wow = *lst;
+    k = 0;
+    while (wow->next != NULL)
+    {
+        if ((wow->next->x == 1 && wow->next->next->x == 2) || (wow->next->x == 2 && wow->next->next->x == 1))
+        {
+            lstdelone(&wow);
+            wow->next->x = 9;
+            k++;
+        }
+        else if ((wow->next->x == 5 && wow->next->next->x == 6) || (wow->next->x == 6 && wow->next->next->x == 5))
+        {
+            lstdelone(&wow);
+            wow->next->x = 10;
+            k++;
+        }
+        else if ((wow->next->x == 7 && wow->next->next->x == 8) || (wow->next->x == 8 && wow->next->next->x == 7))
+        {
+            lstdelone(&wow);
+            wow->next->x = 11;
+            k++;
+        }
+        wow = wow->next;
+    }
+    if (k > 0)
+        enotherclean(lst);
+    return (*lst);
+}
+
+t_lst *cleanlistnext(t_lst **lst)
+{
+    t_lst *wow;
+    int k;
+
+    wow = *lst;
+    k = 0;
+    while (wow->next->next->next != NULL)
+    {
+        if (wow->next->x == 1 && wow->next->next->x == 4 && wow->next->next->next->x == 7)
+        {
+            lstdelone(&wow);
+            wow->next->x = 5;
+            wow->next->next->x = 4;
+            k++;
+        }
+        else if (wow->next->x == 7 && wow->next->next->x == 5 && wow->next->next->next->x == 4)
+        {
+            lstdelone(&wow);
+            wow->next->x = 4;
+            wow->next->next->x = 7;
+            k++;
+        }
+        else if (wow->next->x == 5 && wow->next->next->x == 1 && wow->next->next->next->x == 4)
+        {
+            lstdelone(&wow);
+            wow->next->x = 4;
+            wow->next->next->x = 1;
+            k++;
+
+        }
+        else if (wow->next->x == 2 && wow->next->next->x == 3 && wow->next->next->next->x == 8)
+        {
+            lstdelone(&wow);
+            wow->next->x = 6;
+            wow->next->next->x = 3;
+            k++;
+        }
+        else if (wow->next->x == 8 && wow->next->next->x == 6 && wow->next->next->next->x == 3)
+        {
+            lstdelone(&wow);
+            wow->next->x = 3;
+            wow->next->next->x = 8;
+            k++;
+        }
+        else if (wow->next->x == 6 && wow->next->next->x == 2 && wow->next->next->next->x == 3)
+        {
+            lstdelone(&wow);
+            wow->next->x = 3;
+            wow->next->next->x = 2;
+            k++;
+
+        }
+        wow = wow->next;
+    }
+    if (k > 0)
+        cleanlistnext(lst);
+    return (*lst);
+}
+
 void checkitsort(t_lst **lst_a)
 {
     t_lst *tmp;
 
-    tmp = *lst_a;
-    while (tmp->next != NULL)
-    {
-        if (tmp->x < tmp->next->x)
-            tmp = tmp->next;
-        else
-        {
-            printf("\n\nsad: KO");
-            printf("\n %d", tmp->x);
-            printf("\n %d", tmp->next->x);
-            break ;
+    if (*lst_a != NULL) {
+
+        tmp = *lst_a;
+        while (tmp->next != NULL) {
+            if (tmp->x < tmp->next->x)
+                tmp = tmp->next;
+            else {
+                printf("\n\nsad: KO");
+                printf("\n %d", tmp->x);
+                printf("\n %d", tmp->next->x);
+                break;
+            }
         }
+        if (tmp->next == NULL)
+            printf("\n\nit is sort: OK");
     }
-    if (tmp->next == NULL)
-        printf("\n\nit is sort: OK");
+}
+
+void checknew(t_lst **lst_a, t_lst **lst_b, t_lst **head, t_num **num)
+{
+    t_lst *wow;
+    int i;
+
+    i = 0;
+    wow = *head;
+    while (wow != NULL)
+    {
+        if (wow->x == 1)
+            ra(lst_a, num, 2);
+        else if (wow->x == 2)
+            rb(lst_b, num, 2);
+        else if (wow->x == 3)
+            pa(lst_a, lst_b, num, 2);
+        else if (wow->x == 4)
+            pb(lst_a, lst_b, num, 2);
+        else if (wow->x == 5)
+            sa(*lst_a, num, 2);
+        else if (wow->x == 6)
+            sb(*lst_b, num, 2);
+        else if (wow->x == 7)
+            rra(lst_a, num, 2);
+        else if (wow->x == 8)
+            rrb(lst_b, num, 2);
+        else if (wow->x == 9)
+            rr(*lst_a, *lst_b, num, 2);
+        else if (wow->x == 10)
+            ss(*lst_a, *lst_b, num, 2);
+        else if (wow->x == 11)
+            rrr(lst_a, lst_b, num, 2);
+        wow = wow->next;
+        i++;
+    }
+    (*num)->lenop = i;
+}
+
+void checker(t_num *num, t_lst *head, char **strs, int len)
+{
+    t_lst *lst_a;
+    t_lst *lst_b;
+    t_lst *wow;
+    int i;
+
+    i = 1;
+    lst_b = NULL;
+    lst_a = createlst();
+    inlst(strs[i], lst_a);
+    i++;
+    wow = lst_a;
+    while (i < len)
+    {
+        lst_a->next = createlst();
+        inlst(strs[i], lst_a->next);
+        lst_a = lst_a->next;
+        i++;
+    }
+    lst_a = wow;
+    checknew(&lst_a, &lst_b, &head, &num);
+    write(1, "\n", 1);
+    free(lst_b);
+    lst_b = NULL;
+    putout(&lst_a, &lst_b);
+    checkitsort(&lst_a);
+    printf("\nskiko2: %d\n", num->lenop - 1);
+    free(lst_a);
 }
 
 void push_swap(int len, char **strs)
@@ -230,9 +400,9 @@ void push_swap(int len, char **strs)
         i++;
     }
     lst_a = head;
-    lst_a = start_sort(lst_a, lst_b, num);
-    num->com =  cleanlist(&(num->com));
-    checkitsort(&lst_a);
-    printf("\nskiko: %d\n", num->lenop);
-    printf("\n\nlstlen: %d", lenlst(&(num->com)));
+    start_sort(lst_a, lst_b, num);
+    head = num->com;
+    checker(num, head, strs, len);
+    free(lst_a);
+    free(num);
 }
